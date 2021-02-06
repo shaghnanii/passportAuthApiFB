@@ -30,11 +30,11 @@ class AuthController extends Controller
 
     public function login (Request $request) {
 
-        // $request->validate([
-        //     'email' => 'required|string|email|max:255',
-        //     'password' => 'required|string|min:6',
-        // ]);
-        dd($request->all);
+        $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+        
         $user = User::where('email', $request->email)->first();
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
